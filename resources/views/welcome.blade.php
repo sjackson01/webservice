@@ -1,15 +1,21 @@
-@php
+<!doctype html>
+<html lang="en">
+    @include('includes.head')
+    <!-- START body -->
+    <body style="background-color:#304ffe">
+        @include('includes.nav')
+        <!-- START Cards -->
+        <div class="container">
+            <div class="row">
 
-echo '<pre>';
-var_dump($status);
-echo '</pre>';
-
-echo '<pre>';
-var_dump($version);
-echo '</pre>';
-
-echo '<pre>';
-var_dump($body);
-echo '</pre>';
-
-@endphp
+            @include('includes.id')
+            @include('includes.name')
+            @include('includes.salary')
+            @include('includes.age')
+            </div>    
+        </div>   
+        <!-- End Cards --> 
+        @include('includes.footer')
+    </body> 
+    <!-- END Body -->
+</html>

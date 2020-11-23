@@ -12,7 +12,7 @@ class Receive
     */
 	protected $client;
 
-	public function __construct(Client $lient)
+	public function __construct(Client $client)
 	{ 
         $this->client = $client;
         
