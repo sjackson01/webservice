@@ -7,11 +7,7 @@
         <!-- START Cards -->
         <div class="container">
             <div class="row">
-
-            @include('includes.id')
-            @include('includes.name')
-            @include('includes.salary')
-            @include('includes.age')
+            @include('includes.posts')
             </div>    
         </div>   
         <!-- End Cards --> 

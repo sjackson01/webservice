@@ -24,7 +24,7 @@ class Receive
  	 */
 	public function request()
 	{
-		return $this->client->request('GET', 'employees');
+		return $this->client->request('GET', 'posts');
 	}
 
     /**
