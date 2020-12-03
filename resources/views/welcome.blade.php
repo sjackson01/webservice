@@ -8,6 +8,7 @@
         <div class="container">
             <div class="row">
             @include('includes.posts')
+            @include('includes.comments')
             </div>    
         </div>   
         <!-- End Cards --> 

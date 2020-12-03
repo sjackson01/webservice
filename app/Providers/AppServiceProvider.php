@@ -14,13 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $baseUrl = env('TEST_URL');
 
-        $this->app->singleton('GuzzleHttp\Client', function($api) use ($baseUrl) {
-            return new Client([
-                'base_uri' => $baseUrl,
-            ]);
+        $this->app->singleton('GuzzleHttp\Client', function($api) {
+            return new Client();
         });
+
     }
 
     /**

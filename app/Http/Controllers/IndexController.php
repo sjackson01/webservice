@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Util\Receive;
+use App\Util\Transfer;
 
 class IndexController extends Controller
 {
@@ -14,10 +14,11 @@ class IndexController extends Controller
     * Class constructor.
     *
     */
-   public function __construct(Receive $status, Receive $body, Receive $version)
+   public function __construct(Transfer $status, Transfer $bodyUp, Transfer $bodyDown, Transfer $version)
    {   
        $this->status = $status; 
-       $this->body = $body;
+       $this->bodyUp = $bodyUp;
+       $this->bodyDown = $bodyDown;
        $this->version = $version; 
    }
 
@@ -29,10 +30,11 @@ class IndexController extends Controller
    {    
 
        $status = $this->status->getStatus();
-       $body = $this->body->getBody(); 
+       $bodyUp = $this->bodyUp->getBodyUp(); 
+       $bodyDown = $this->bodyDown->getBodyDown(); 
        $version = $this->version->getVersion(); 
        
-       return view('welcome', compact('body', 'status', 'version'));
+       return view('welcome', compact('bodyUp', 'bodyDown', 'status', 'version'));
    }
    
     
