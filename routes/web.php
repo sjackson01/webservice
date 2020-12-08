@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'IndexController@index');
+
+Route::get('/up', 'UpController@upload');
+
+Route::get('/down', 'DownController@download');

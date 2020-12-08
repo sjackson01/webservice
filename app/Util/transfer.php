@@ -1,24 +1,24 @@
 <?php
-namespace App\Util;
 
+namespace App\Util;
 use GuzzleHttp\Client;
 
-class Transfer
+class Transfer 
 {
-  
+
    /**
-    * Class constructor.
-    *
-    */
+	* Class constructor.
+	*
+	*/
 	protected $client;
 
 	public function __construct(Client $client)
 	{ 
-        $this->client = $client;
-        
+		$this->client = $client;
+		
     }
     
-	/**
+    /**
 	 * 
 	 * @return Client
 	 */
@@ -36,7 +36,7 @@ class Transfer
 		return $this->client->request('GET', env('UP_URL') . 'comments');
 	}
 
-    /**
+	/**
 	 *  
 	 * @return array 
 	 */
@@ -48,41 +48,41 @@ class Transfer
 		
 		return [];
 	}
+	
+	/**
+	 *  
+	 * @return Status 
+	 */
+	public function getUpStatus()
+	{	
+		return $this->responseHandler(self::up()->getStatusCode());
+	}
+
+	/**
+	 *  
+	 * @return Version 
+	 */
+	public function getUpVersion()
+	{
+		return $this->responseHandler(self::up()->getProtocolVersion());
+    }
     
     /**
 	 *  
 	 * @return Status 
 	 */
-	public function getStatus()
+	public function getDownStatus()
 	{	
 		return $this->responseHandler(self::down()->getStatusCode());
 	}
 
-    /**
+	/**
 	 *  
 	 * @return Version 
 	 */
-	public function getVersion()
+	public function getDownVersion()
 	{
 		return $this->responseHandler(self::down()->getProtocolVersion());
 	}
 
-   /**
-	*  
-	* @return Body 
-	*/
-	public function getBodyUp()
-	{
-		return $this->responseHandler(self::up()->getBody());
-	}
-
-   /**
- 	*  
- 	* @return Body 
- 	*/
-	public function getBodyDown()
-	{
-		return $this->responseHandler(self::down()->getBody());
-	}
- 
 }
