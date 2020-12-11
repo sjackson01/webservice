@@ -2,17 +2,10 @@
     <div class="card">
     <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
         <div class="card-body">
-            <h5 class="card-title">Comments</h5>
+            <h5 class="card-title">Moodle</h5>
                 <p class="card-text">
                     @php
-                    foreach ($bodyUp as $key => $value) {
-                            echo $value['id'];
-                            echo '<br>';  
-                            echo $value['body'];
-                            echo '<br>';
-                            echo $value['postId'];
-                            echo '<br>'; 
-                        }
+                    var_dump($bodyUp); 
                     @endphp
                 </p>
         </div>

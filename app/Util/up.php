@@ -10,7 +10,7 @@ class Up Extends Transfer
 	*/
 	public function getBodyUp()
 	{
-		return $this->responseHandler(self::up()->getBody());
+		return $this->responseHandler(self::up(env('UP_URL'))->getBody());
 	}
 
 }

@@ -6,12 +6,7 @@
                 <p class="card-text">
                     @php
                     foreach ($bodyDown as $key => $value) {
-                            echo $value['id'];
-                            echo '<br>';  
-                            echo $value['title'];
-                            echo '<br>';
-                            echo $value['author'];
-                            echo '<br>'; 
+                            echo $value['source'];
                         }
                     @endphp
                 </p>

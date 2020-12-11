@@ -24,16 +24,16 @@ class Transfer
 	 */
 	public function down()
 	{
-		return $this->client->request('GET', env('DOWN_URL') . 'posts');
+		return $this->client->request('GET', env('DOWN_URL') . 'enrollment');
 	}
 
 	/**
 	 * 
 	 * @return Client
 	 */
-	public function up()
+	public function up($url)
 	{
-		return $this->client->request('GET', env('UP_URL') . 'comments');
+		return $this->client->request('GET', $url);
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Transfer
 	 */
 	public function getUpStatus()
 	{	
-		return $this->responseHandler(self::up()->getStatusCode());
+		return $this->responseHandler(self::up(env('UP_URL'))->getStatusCode());
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Transfer
 	 */
 	public function getUpVersion()
 	{
-		return $this->responseHandler(self::up()->getProtocolVersion());
+		return $this->responseHandler(self::up(env('UP_URL'))->getProtocolVersion());
     }
     
     /**
