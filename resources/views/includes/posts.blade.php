@@ -1,13 +1,12 @@
 <div class="col-sm">
     <div class="card">
-    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
         <div class="card-body">
-            <h5 class="card-title">Posts</h5>
+            <h5 class="card-title">Test Server</h5>
                 <p class="card-text">
-                    @php
-                    foreach ($bodyDown as $key => $value) {
-                            echo $value['source'];
-                        }
+                    @php 
+                    echo '<pre>';
+                    print_r($bodyDown);
+                    echo '<pre>';
                     @endphp
                 </p>
         </div>

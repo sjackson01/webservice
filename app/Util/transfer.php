@@ -24,7 +24,7 @@ class Transfer
 	 */
 	public function down()
 	{
-		return $this->client->request('GET', env('DOWN_URL') . 'enrollment');
+		return $this->client->request('GET', env('DOWN_URL') . 'test');
 	}
 
 	/**
