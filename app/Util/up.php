@@ -8,9 +8,20 @@ class Up Extends Transfer
 	*  
 	* @return Body 
 	*/
-	public function getBodyUp()
+	public function manualEnrol()
 	{
-		return $this->responseHandler(self::up(env('UP_URL'))->getBody());
+		return $this->responseHandler(self::up(env('TEST_URL_ENROL'))->getBody());
 	}
+
+	/**
+	*  
+	* @return Body 
+	*/
+	public function manualUnenrol()
+	{
+		return $this->responseHandler(self::up(env('TEST_URL_UNENROL'))->getBody());
+	}
+
+
 
 }

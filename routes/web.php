@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'IndexController@index');
 
-Route::get('/up', 'UpController@upload');
+Route::get('/enrol', 'UpController@enrol');
+
+Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');

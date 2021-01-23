@@ -5,7 +5,7 @@
             <h5 class="card-title">Moodle</h5>
                 <p class="card-text">
                     @php
-                    var_dump($bodyUp); 
+                        var_dump($manualUnenrol); 
                     @endphp
                 </p>
         </div>
