@@ -7,7 +7,7 @@
         <!-- START Cards -->
         <div class="container">
             <div class="row">
-            @include('includes.posts')
+            @include('includes.raw')
             </div>    
         </div>   
         <!-- End Cards --> 
