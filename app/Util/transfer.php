@@ -19,7 +19,7 @@ class Transfer
     }
     
     /**
-	 * 
+	 * Send endpoint request 
 	 * @return Client
 	 */
 	public function down()
@@ -28,7 +28,7 @@ class Transfer
 	}
 
 	/**
-	 * 
+	 * Send endpoint request 
 	 * @return Client
 	 */
 	public function up($url)
@@ -37,7 +37,7 @@ class Transfer
 	}
 
 	/**
-	 *  
+	 * Decode response 
 	 * @return array 
 	 */
 	public function responseHandler($response)
@@ -50,7 +50,7 @@ class Transfer
 	}
 	
 	/**
-	 *  
+	 * Check endpoint status 
 	 * @return Status 
 	 */
 	public function getUpStatus()
@@ -59,7 +59,7 @@ class Transfer
 	}
 
 	/**
-	 *  
+	 * Check endpoint version  
 	 * @return Version 
 	 */
 	public function getUpVersion()
@@ -68,7 +68,7 @@ class Transfer
     }
     
     /**
-	 *  
+	 * Check endpoint status 
 	 * @return Status 
 	 */
 	public function getDownStatus()
@@ -77,7 +77,7 @@ class Transfer
 	}
 
 	/**
-	 *  
+	 * Check endpoint version  
 	 * @return Version 
 	 */
 	public function getDownVersion()

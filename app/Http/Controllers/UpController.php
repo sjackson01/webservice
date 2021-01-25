@@ -20,7 +20,7 @@ class UpController extends Controller
    }
 
    /**
-    * 
+    * Return view and data from endpoint
     * @return View
     */
    public function enrol()
@@ -28,7 +28,11 @@ class UpController extends Controller
        $manualEnrol = $this->manualEnrol->manualEnrol(); 
        return view('enrol', compact('manualEnrol'));
    }
-   
+
+   /**
+    * Return view and data from endpoint
+    * @return View
+    */
    public function unenrol()
    {
         $manualUnenrol = $this->manualUnenrol->manualUnenrol(); 

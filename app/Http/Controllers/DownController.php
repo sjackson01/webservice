@@ -18,7 +18,7 @@ class DownController extends Controller
    }
 
    /**
-    * 
+    * Return view and data from endpoint
     * @return View
     */
    public function download()

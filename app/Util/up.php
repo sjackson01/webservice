@@ -6,7 +6,8 @@ class Up Extends Transfer
 {
 
    /**
-	*  
+	* Add enrolment info recieved from
+	* external API to endpoint request 
 	* @return string 
 	*/
 	public function getRoleId()
@@ -16,7 +17,8 @@ class Up Extends Transfer
 	}
 
    /**
-	*  
+	* Add enrolment info recieved from
+	* external API to endpoint request 
 	* @return string 
 	*/
 	public function getUserId()
@@ -26,7 +28,8 @@ class Up Extends Transfer
 	}
 
    /**
-	*  
+	* Add enrolment info recieved from
+	* external API to endpoint request 
 	* @return string
 	*/
 	public function getCourseId()
@@ -36,7 +39,7 @@ class Up Extends Transfer
 	}
 
    /**
-	*  
+	* Construct endpoint request 
 	* @return string
 	*/
 	public function urlBuilderEnrol()
@@ -48,7 +51,7 @@ class Up Extends Transfer
 	}
 
    /**
-	*  
+	* Construct endpoint request
 	* @return string
 	*/
 	public function urlBuilderUnenrol()
@@ -60,7 +63,7 @@ class Up Extends Transfer
 	}	
 
    /**
-	*  
+	* Send endpoint request 
 	* @return Body 
 	*/
 	public function manualEnrol()
@@ -69,7 +72,7 @@ class Up Extends Transfer
 	}
 
    /**
-	*  
+	* Send endpoint request 
 	* @return Body 
 	*/
 	public function manualUnenrol()
