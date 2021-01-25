@@ -6,7 +6,6 @@ use App\Util\Transfer;
 class IndexController extends Controller
 {
 
-   protected $body;
    protected $status;
    protected $version; 
 
@@ -14,28 +13,23 @@ class IndexController extends Controller
     * Class constructor.
     *
     */
-   public function __construct(Transfer $status, Transfer $bodyUp, Transfer $bodyDown, Transfer $version)
+   public function __construct(Transfer $upStatus, Transfer $downStatus)
    {   
-       $this->status = $status; 
-       $this->bodyUp = $bodyUp;
-       $this->bodyDown = $bodyDown;
-       $this->version = $version; 
+       $this->upStatus = $upStatus; 
+       $this->downStatus = $downStatus; 
    }
 
    /**
-    * 
+    * Return view and data from endpoint
     * @return View
     */
    public function index()
    {    
 
-       $status = $this->status->getStatus();
-       $bodyUp = $this->bodyUp->getBodyUp(); 
-       $bodyDown = $this->bodyDown->getBodyDown(); 
-       $version = $this->version->getVersion(); 
-       
-       return view('welcome', compact('bodyUp', 'bodyDown', 'status', 'version'));
+       $upStatus = $this->upStatus->getUpStatus(); 
+       $downStatus = $this->downStatus->getDownStatus(); 
+
+       return view('welcome', compact('upStatus', 'downStatus'));
    }
-   
     
 }
