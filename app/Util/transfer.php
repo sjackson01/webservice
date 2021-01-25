@@ -1,43 +1,43 @@
 <?php
-namespace App\Util;
 
+namespace App\Util;
 use GuzzleHttp\Client;
 
-class Transfer
+class Transfer 
 {
-  
+
    /**
-    * Class constructor.
-    *
-    */
+	* Class constructor.
+	*
+	*/
 	protected $client;
 
 	public function __construct(Client $client)
 	{ 
-        $this->client = $client;
-        
+		$this->client = $client;
+		
     }
     
-	/**
-	 * 
+    /**
+	 * Send endpoint request 
 	 * @return Client
 	 */
 	public function down()
 	{
-		return $this->client->request('GET', env('DOWN_URL') . 'posts');
+		return $this->client->request('GET', env('DOWN_URL') . 'test');
 	}
 
 	/**
-	 * 
+	 * Send endpoint request 
 	 * @return Client
 	 */
-	public function up()
+	public function up($url)
 	{
-		return $this->client->request('GET', env('UP_URL') . 'comments');
+		return $this->client->request('GET', $url);
 	}
 
-    /**
-	 *  
+	/**
+	 * Decode response 
 	 * @return array 
 	 */
 	public function responseHandler($response)
@@ -48,41 +48,41 @@ class Transfer
 		
 		return [];
 	}
-    
-    /**
-	 *  
+	
+	/**
+	 * Check endpoint status 
 	 * @return Status 
 	 */
-	public function getStatus()
+	public function getUpStatus()
+	{	
+		return $this->responseHandler(self::up(env('UP_URL'))->getStatusCode());
+	}
+
+	/**
+	 * Check endpoint version  
+	 * @return Version 
+	 */
+	public function getUpVersion()
+	{
+		return $this->responseHandler(self::up(env('UP_URL'))->getProtocolVersion());
+    }
+    
+    /**
+	 * Check endpoint status 
+	 * @return Status 
+	 */
+	public function getDownStatus()
 	{	
 		return $this->responseHandler(self::down()->getStatusCode());
 	}
 
-    /**
-	 *  
+	/**
+	 * Check endpoint version  
 	 * @return Version 
 	 */
-	public function getVersion()
+	public function getDownVersion()
 	{
 		return $this->responseHandler(self::down()->getProtocolVersion());
 	}
 
-   /**
-	*  
-	* @return Body 
-	*/
-	public function getBodyUp()
-	{
-		return $this->responseHandler(self::up()->getBody());
-	}
-
-   /**
- 	*  
- 	* @return Body 
- 	*/
-	public function getBodyDown()
-	{
-		return $this->responseHandler(self::down()->getBody());
-	}
- 
 }
