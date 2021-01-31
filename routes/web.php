@@ -20,3 +20,5 @@ Route::get('/enrol', 'UpController@enrol');
 Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');
+
+Route::get('/functions', 'DatabaseController@show');
