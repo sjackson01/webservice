@@ -1,18 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Util\Reader;
 
 class DatabaseController extends Controller
 {
-    public function show()
-    {   
-        $functions = DB::table('functions')->get();
 
-        return view('functions', ['functions' => $functions]);
+   protected $queryFuntions;
+
+   /**
+    * Class constructor.
+    *
+    */
+   public function __construct(Reader $queryFunctions)
+   {   
+       $this->queryFunctions = $queryFuntions; 
+   }
+
+   /**
+    * Return view and data from endpoint
+    * @return View
+    */
+   public function displayFunctions()
+   {    
+       $functions = $this->queryFuntions->getFunctions(); 
+       
+       return view('database', compact('funcitons'));
+   }
+   
     
-    }
-
 }
