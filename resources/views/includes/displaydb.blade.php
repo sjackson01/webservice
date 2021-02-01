@@ -5,7 +5,7 @@
             <h5 class="card-title">Db Test</h5>
                 <p class="card-text">
                  @php
-                    $array = json_decode($forView, true);
+                    $array = json_decode($functions, true);
                     echo '<pre>';
                     print_r($array);
                     echo '</pre>';

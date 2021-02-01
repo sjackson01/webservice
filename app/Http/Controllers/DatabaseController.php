@@ -6,7 +6,7 @@ use App\Util\Reader;
 class DatabaseController extends Controller
 {
 
-   protected $queryFuntions;
+   protected $queryFunctions;
 
    /**
     * Class constructor.
@@ -14,7 +14,7 @@ class DatabaseController extends Controller
     */
    public function __construct(Reader $queryFunctions)
    {   
-       $this->queryFunctions = $queryFuntions; 
+       $this->queryFunctions = $queryFunctions; 
    }
 
    /**
@@ -23,9 +23,9 @@ class DatabaseController extends Controller
     */
    public function displayFunctions()
    {    
-       $functions = $this->queryFuntions->getFunctions(); 
+       $functions = $this->queryFunctions->getFunctions(); 
        
-       return view('database', compact('funcitons'));
+       return view('database', compact('functions'));
    }
    
     
