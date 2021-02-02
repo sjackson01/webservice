@@ -14,4 +14,12 @@ class Reader
     
     }
 
+    public function getLockFunctions()
+    {   
+        $query = DB::table('lock')->pluck('functions');
+
+        return $query;       
+    
+    }
+
 }

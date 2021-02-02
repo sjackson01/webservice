@@ -21,4 +21,13 @@ Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');
 
-Route::get('/functions', 'DatabaseController@displayFunctions');
+Route::get('/database', 'DatabaseController@getDatabaseInfo');
+
+Route::post('/database', 'DatabaseController@store');
+
+
+
+
+
+
+
