@@ -10,4 +10,9 @@ class Writer Extends Reader
         DB::table('lock')->insert(['functions' => $function]);
     }
 
+    public function deleteFunctions($lockId)
+    {   
+        DB::table('lock')->delete(['id' => $lockId]);
+    }
+
 }

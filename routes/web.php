@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,9 @@ Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');
 
-Route::get('/database', 'DatabaseController@getDatabaseInfo');
+Route::get('/database', 'DatabaseController@handleData');
 
-Route::post('/database', 'DatabaseController@store');
-
-
-
+Route::post('/database', 'DatabaseController@handleData');
 
 
 

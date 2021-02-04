@@ -11,7 +11,6 @@ class Reader
         $query = DB::table('functions')->pluck('functions');
 
         return $query;       
-    
     }
 
     public function getLockFunctions()
@@ -19,7 +18,13 @@ class Reader
         $query = DB::table('lock')->pluck('functions');
 
         return $query;       
-    
+    }
+
+    public function getLockIds()
+    {   
+        $query = DB::table('lock')->pluck('id');
+
+        return $query;       
     }
 
 }
