@@ -4,5 +4,6 @@
     <a href="/enrol"><button class="btn btn-outline-success" type="button">Enrol</button></a>
     <a href="/unenrol"><button class="btn btn-outline-success" type="button">UnEnrol</button></a>
     <a href="/down"><button class="btn btn-outline-success" type="button">Down</button></a>
+    <a href="/database"><button class="btn btn-outline-success" type="button">Database</button></a>
   </form>
 </nav>
