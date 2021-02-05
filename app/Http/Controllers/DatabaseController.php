@@ -9,59 +9,68 @@ use App\Util\Writer;
 class DatabaseController extends Controller
 {
 
-    protected $queryFunctions;
-    protected $queryLockFunctions;
-    protected $queryLockId; 
-    protected $addFunctions;
+    protected $selectFunctions;
+    protected $selectLockFunctions;
+    protected $selectLockId; 
+    protected $insertFunctions;
     protected $removeFunctions;  
 
     /**
     * Class constructor.
-    *
+    * Initialize an instance of 
+    * DatabaseController Object 
     */
-    public function __construct(Reader $queryFunctions, Reader $queryLockFunctions, Reader $queryLockId, Writer $addFunctions , Writer $removeFunctions)
+    public function __construct(Reader $selectFunctions, Reader $selectLockFunctions, Reader $selectLockId, Writer $insertFunctions , Writer $deleteFunctions)
     {   
-        $this->queryFunctions = $queryFunctions;
-        $this->queryLockFunctions = $queryLockFunctions;
-        $this->queryLockId =  $queryLockId; 
-        $this->addFunctions = $addFunctions;
-        $this->removeFunctions = $removeFunctions;
+        $this->selectFunctions = $selectFunctions;
+        $this->selectLockFunctions = $selectLockFunctions;
+        $this->selectLockId =  $selectLockId; 
+        $this->insertFunctions = $insertFunctions;
+        $this->deleteFunctions = $deleteFunctions;
 
     }
 
     /**
-    * Return view and data from endpoint
+    * Query select data and return
+    * data with view
     * @return View
     */
-    public function getDatabaseInfo()
+    public function selection()
     {    
-        $functions = $this->queryFunctions->getFunctions();
-        $lockIds = $this->queryLockId->getLockIds(); 
-        $activeFunctions = $this->queryLockFunctions->getLockFunctions(); 
+        $functions = $this->selectFunctions->selectFunctions();
+        $lockIds = $this->selectLockId->selectLockIds(); 
+        $activeFunctions = $this->selectLockFunctions->selectLockFunctions(); 
         
         return view('database', compact('functions', 'activeFunctions', 'lockIds'));
     }
 
+    /**
+    * Query insert data and return
+    * select data with view
+    * @return View
+    */
     public function add()
     {
-        $query = $this->addFunctions->setFunctions(request('function')); 
-        $functions = $this->queryFunctions->getFunctions();
-        $lockIds = $this->queryLockId->getLockIds(); 
-        $activeFunctions = $this->queryLockFunctions->getLockFunctions();
-        
-        return view('database', Compact('functions', 'activeFunctions', 'lockIds'));
+        $query = $this->insertFunctions->insertFunctions(request('function')); 
+        return DatabaseController::selection(); 
     }
 
+    /**
+    * Query delete data and return
+    * select data with view
+    * @return View
+    */
     public function remove()
     {
-        $query = $this->removeFunctions->deleteFunctions(number_format(request('lockId'))); 
-        $functions = $this->queryFunctions->getFunctions();
-        $lockIds = $this->queryLockId->getLockIds(); 
-        $activeFunctions = $this->queryLockFunctions->getLockFunctions();
-        
-        return view('database', Compact('functions', 'activeFunctions', 'lockIds'));
+        $query = $this->deleteFunctions->deleteFunctions(number_format(request('lockId'))); 
+        return DatabaseController::selection();
     }
 
+    /**
+    * Return view and data 
+    * based on form request 
+    * @return View
+    */
     public function handleData(Request $request)
     {
         if($request->function)
@@ -74,7 +83,7 @@ class DatabaseController extends Controller
         }
         else
         {
-            return DatabaseController::getDatabaseInfo();  
+            return DatabaseController::selection();  
         }
 
     }

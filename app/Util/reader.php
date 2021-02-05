@@ -6,21 +6,36 @@ use Illuminate\Support\Facades\DB;
 
 class Reader
 {
-    public function getFunctions()
+    /**
+    * Return list of webservice
+    * functions 
+	* @return Query 
+	*/
+    public function selectFunctions()
     {   
         $query = DB::table('functions')->pluck('functions');
 
         return $query;       
     }
 
-    public function getLockFunctions()
+    /**
+    * Return list of saved active
+    * webservice functions
+	* @return Query 
+	*/
+    public function selectLockFunctions()
     {   
         $query = DB::table('lock')->pluck('functions');
 
         return $query;       
     }
 
-    public function getLockIds()
+    /**
+    * Return list of active 
+    * webservice function ids 
+	* @return Query 
+	*/
+    public function selectLockIds()
     {   
         $query = DB::table('lock')->pluck('id');
 
