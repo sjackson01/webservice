@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Util;
 use Illuminate\Support\Facades\DB;
 
-class Reader
+class Reader Extends Down
 {
     /**
     * Return list of webservice

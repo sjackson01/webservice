@@ -20,7 +20,7 @@ class Down extends Transfer
 	*/
 	public  function getKey()
 	{
-		$bodyDown = $this->responseHandler(self::down()->getBody());
+		$bodyDown = $this->getBodyDown();
 
 		foreach($bodyDown as $array)
 		{
@@ -37,7 +37,7 @@ class Down extends Transfer
 	*/
 	public function getValue()
 	{
-		$bodyDown = $this->responseHandler(self::down()->getBody());
+		$bodyDown = $this->getBodyDown();
 
 		foreach($bodyDown[0] as $array=>$key)
 		{
