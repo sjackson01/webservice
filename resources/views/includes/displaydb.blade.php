@@ -19,17 +19,19 @@
                             echo $value; 
                             echo "</div>";
                             // End function radio
-                                
+                            
                             // Begin dropdown function parameters
                             echo '<div class="dropdown">';
                             echo '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-                            echo   "Dropdown button";
+                            echo   "Parameters";
                             echo '</button>';
-                            echo '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-                                echo '<a class="dropdown-item" href="#">Action</a>';
-                                echo '<a class="dropdown-item" href="#">Another action</a>';
-                                echo '<a class="dropdown-item" href="#">Something else here</a>';
-                            echo '</div>';
+                                echo '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+                                    foreach($parameters as $param){
+                                    echo '<a class="dropdown-item">';
+                                    echo $param;
+                                    echo'</a>';
+                                    }
+                                echo '</div>';
                             echo '</div>';
                             // End dropdown function parameters
                         }

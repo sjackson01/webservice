@@ -48,4 +48,16 @@ class Down extends Transfer
 
 	}
 
+	/**
+	* Return endpoint keys
+	* @return array
+	*/
+	public function getParameters()
+	{
+		$keys = $this->getKey();
+		$values =  $this->getValue();
+		return array_merge($keys, $values);
+
+	}
+
 }
