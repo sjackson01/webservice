@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request; 
 use App\Util\Reader;
@@ -12,10 +13,11 @@ class DatabaseController extends Controller
 
     protected $selectFunctions;
     protected $selectLockFunctions;
-    protected $selectLockId; 
+    protected $selectLockId;
     protected $insertFunctions;
-    protected $removeFunctions;
-    protected $parameters;   
+    protected $deleteFunctions;
+    protected $parameters;
+
 
     /**
     * Class constructor.

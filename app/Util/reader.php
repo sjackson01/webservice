@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class Reader Extends Down
 {
+
     /**
     * Return list of webservice
     * functions 
@@ -12,9 +13,7 @@ class Reader Extends Down
 	*/
     public function selectFunctions()
     {   
-        $query = DB::table('functions')->pluck('functions');
-
-        return $query;       
+        return DB::table('functions')->get(); 
     }
 
     /**
