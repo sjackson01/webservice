@@ -1,4 +1,4 @@
 @extends('layout.app')
 @section('content')
-    @include('includes.displaydb')
+    @include('includes.functions')
 @endsection
