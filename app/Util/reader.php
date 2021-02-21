@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Util;
 use Illuminate\Support\Facades\DB;
 
-class Reader
+class Reader Extends Down
 {
+
     /**
     * Return list of webservice
     * functions 
@@ -13,9 +13,7 @@ class Reader
 	*/
     public function selectFunctions()
     {   
-        $query = DB::table('functions')->pluck('functions');
-
-        return $query;       
+        return DB::table('functions')->get(); 
     }
 
     /**
