@@ -8,7 +8,7 @@ use App\Util\Reader;
 use App\Util\Writer;
 use App\Util\Down; 
 
-class DatabaseController extends Controller
+class FunctionController extends Controller
 {
 
     protected $selectFunctions;
@@ -22,7 +22,7 @@ class DatabaseController extends Controller
     /**
     * Class constructor.
     * Initialize an instance of 
-    * DatabaseController Object 
+    * FunctionController Object 
     */
     public function __construct(Reader $selectFunctions, Reader $selectLockFunctions, Reader $selectLockId, Writer $insertFunctions , Writer $deleteFunctions, Down $parameters)
     {   
@@ -58,7 +58,7 @@ class DatabaseController extends Controller
     public function add()
     {
         $query = $this->insertFunctions->insertFunctions(request('function')); 
-        return DatabaseController::selection(); 
+        return FunctionController::selection(); 
     }
 
     /**
@@ -69,7 +69,7 @@ class DatabaseController extends Controller
     public function remove()
     {
         $query = $this->deleteFunctions->deleteFunctions(number_format(request('lockId'))); 
-        return DatabaseController::selection();
+        return FunctionController::selection();
     }
 
     /**
@@ -81,15 +81,15 @@ class DatabaseController extends Controller
     {
         if($request->function)
         {
-            return DatabaseController::add();
+            return FunctionController::add();
         }
         elseif($request->lockId)
         {
-            return DatabaseController::remove();
+            return FunctionController::remove();
         }
         else
         {
-            return DatabaseController::selection();  
+            return FunctionController::selection();  
         }
 
     }
