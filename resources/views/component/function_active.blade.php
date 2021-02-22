@@ -1,6 +1,6 @@
 <!-- BEGIN active functions list -->
     <h5 class="card-title">Active Functions</h5>
-    <form method="post" action="/database" enctype="multipart/form-data">
+    <form method="post" action="/functions" enctype="multipart/form-data">
         {{ csrf_field() }}
         @php
             $array = json_decode($activeFunctions, true);

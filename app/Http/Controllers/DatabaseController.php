@@ -47,7 +47,7 @@ class DatabaseController extends Controller
         $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
         $parameters =  $this->parameters->getParameters();  
         
-        return view('database', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
+        return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
     }
 
     /**

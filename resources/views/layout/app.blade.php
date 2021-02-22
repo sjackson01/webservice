@@ -15,7 +15,7 @@
         <form class="form-inline">
             <a href="{{ url('/') }}"><button class="btn btn-outline-info" type="button">Home</button></a>
             <a href="/down"><button class="btn btn-outline-info" type="button">Down</button></a>
-            <a href="/database"><button class="btn btn-outline-info" type="button">Database</button></a>
+            <a href="/functions"><button class="btn btn-outline-info" type="button">Functions</button></a>
         </form>
         </nav>
         <!-- END nav -->

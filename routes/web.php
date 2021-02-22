@@ -22,9 +22,9 @@ Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');
 
-Route::get('/database', 'DatabaseController@handleData');
+Route::get('/functions', 'DatabaseController@handleData');
 
-Route::post('/database', 'DatabaseController@handleData');
+Route::post('/functions', 'DatabaseController@handleData');
 
 
 
