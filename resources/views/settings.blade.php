@@ -1,4 +1,4 @@
 @extends('layout.app')
 @section('content')
-    <h1>Place Holder</h1>
+    @include('includes.settings_form')
 @endsection

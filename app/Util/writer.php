@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\DB;
 
 class Writer Extends Reader
 {
+       
     /**
     * Insert functions into
     * active function
-	* @return Query 
+	* @return bool
 	*/
     public function insertFunctions($function)
     {   
@@ -18,7 +19,7 @@ class Writer Extends Reader
     /**
     * Delete functions from 
     * active functions
-	* @return Query 
+	* @return bool 
 	*/
     public function deleteFunctions($lockId)
     {   
