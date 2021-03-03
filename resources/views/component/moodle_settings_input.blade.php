@@ -14,4 +14,10 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+@php
+  echo '<p class="lead mt-4 font-weight-bold">'; 
+  echo "Current Url: ";
+  echo  $moodleUrl->url;
+  echo '</p>';
+@endphp
 <!-- END moodle input --> 

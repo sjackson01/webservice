@@ -1,14 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Util\Reader;
 
-use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    public function getSettings()
+    protected $moodleUrl; 
+
+    /**
+    * Class constructor.
+    * Initialize an instance of 
+    * SettingsController Object 
+    */
+    public function __construct(Reader $moodleUrl)
     {
-        return view('settings');
+        $this->moodleUrl = $moodleUrl; 
     }
+
+    public function selectUrl()
+    {
+        $moodleUrl = $this->moodleUrl->selectMoodleURL();
+
+        return view('settings', compact('moodleUrl'));
+    }
+    
 
 }

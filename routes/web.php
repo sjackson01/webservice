@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', 'IndexController@index');
 
-Route::get('/settings', 'SettingsController@getSettings');
+Route::get('/settings', 'SettingsController@selectUrl');
 
 Route::get('/enrol', 'UpController@enrol');
 
