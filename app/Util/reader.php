@@ -44,10 +44,22 @@ class Reader Extends Down
     * Return moodle url 
 	* @return Query 
 	*/
-    public function selectMoodleURL()
+    public function selectMoodleUrl()
     {
 
         $query = DB::table('settings')->first();
+
+        return $query;
+    }
+
+    /**
+    * Return source url 
+	* @return Query 
+	*/
+    public function selectSourceUrl()
+    {
+
+        $query = DB::table('settings')->latest()->first();
 
         return $query;
     }

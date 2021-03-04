@@ -34,7 +34,7 @@ class FunctionController extends Controller
 
     }
 
-    /**
+   /**
     * Query select data and return
     * data with view
     * @return View
@@ -49,7 +49,7 @@ class FunctionController extends Controller
         return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
     }
 
-    /**
+   /**
     * Query insert data and return
     * select data with view
     * @return View
@@ -60,7 +60,7 @@ class FunctionController extends Controller
         return FunctionController::selection(); 
     }
 
-    /**
+   /**
     * Query delete data and return
     * select data with view
     * @return View
@@ -71,7 +71,7 @@ class FunctionController extends Controller
         return FunctionController::selection();
     }
 
-    /**
+   /**
     * Return view and data 
     * based on form request 
     * @return View
