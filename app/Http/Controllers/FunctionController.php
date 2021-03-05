@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request; 
 use App\Util\Reader;
 use App\Util\Writer;
 use App\Util\Down; 
 
-class DatabaseController extends Controller
+class FunctionController extends Controller
 {
 
     protected $selectFunctions;
@@ -19,10 +18,10 @@ class DatabaseController extends Controller
     protected $parameters;
 
 
-    /**
+   /**
     * Class constructor.
     * Initialize an instance of 
-    * DatabaseController Object 
+    * FunctionController Object 
     */
     public function __construct(Reader $selectFunctions, Reader $selectLockFunctions, Reader $selectLockId, Writer $insertFunctions , Writer $deleteFunctions, Down $parameters)
     {   
@@ -35,7 +34,7 @@ class DatabaseController extends Controller
 
     }
 
-    /**
+   /**
     * Query select data and return
     * data with view
     * @return View
@@ -47,10 +46,10 @@ class DatabaseController extends Controller
         $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
         $parameters =  $this->parameters->getParameters();  
         
-        return view('database', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
+        return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
     }
 
-    /**
+   /**
     * Query insert data and return
     * select data with view
     * @return View
@@ -58,10 +57,10 @@ class DatabaseController extends Controller
     public function add()
     {
         $query = $this->insertFunctions->insertFunctions(request('function')); 
-        return DatabaseController::selection(); 
+        return FunctionController::selection(); 
     }
 
-    /**
+   /**
     * Query delete data and return
     * select data with view
     * @return View
@@ -69,10 +68,10 @@ class DatabaseController extends Controller
     public function remove()
     {
         $query = $this->deleteFunctions->deleteFunctions(number_format(request('lockId'))); 
-        return DatabaseController::selection();
+        return FunctionController::selection();
     }
 
-    /**
+   /**
     * Return view and data 
     * based on form request 
     * @return View
@@ -81,15 +80,15 @@ class DatabaseController extends Controller
     {
         if($request->function)
         {
-            return DatabaseController::add();
+            return FunctionController::add();
         }
         elseif($request->lockId)
         {
-            return DatabaseController::remove();
+            return FunctionController::remove();
         }
         else
         {
-            return DatabaseController::selection();  
+            return FunctionController::selection();  
         }
 
     }
