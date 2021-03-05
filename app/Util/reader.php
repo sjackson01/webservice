@@ -3,7 +3,7 @@
 namespace App\Util;
 use Illuminate\Support\Facades\DB;
 
-class Reader Extends Down
+class Reader 
 {
 
    /**
@@ -59,7 +59,7 @@ class Reader Extends Down
     public function selectSourceUrl()
     {
 
-        $query = DB::table('settings')->latest()->first();
+        $query = DB::table('settings')->where('settingsId', 2)->first();
 
         return $query;
     }

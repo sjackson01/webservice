@@ -3,10 +3,10 @@
 namespace App\Util;
 use Illuminate\Support\Facades\DB;
 
-class Writer Extends Reader
+class Writer
 {
        
-    /**
+   /**
     * Insert functions into
     * active function
 	* @return bool
@@ -16,7 +16,7 @@ class Writer Extends Reader
         DB::table('lock')->insert(['functions' => $function]);
     }
 
-    /**
+   /**
     * Delete functions from 
     * active functions
 	* @return bool 
