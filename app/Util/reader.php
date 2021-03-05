@@ -3,10 +3,10 @@
 namespace App\Util;
 use Illuminate\Support\Facades\DB;
 
-class Reader Extends Down
+class Reader 
 {
 
-    /**
+   /**
     * Return list of webservice
     * functions 
 	* @return Query 
@@ -16,7 +16,7 @@ class Reader Extends Down
         return DB::table('functions')->get(); 
     }
 
-    /**
+   /**
     * Return list of saved active
     * webservice functions
 	* @return Query 
@@ -28,7 +28,7 @@ class Reader Extends Down
         return $query;       
     }
 
-    /**
+   /**
     * Return list of active 
     * webservice function ids 
 	* @return Query 
@@ -38,6 +38,30 @@ class Reader Extends Down
         $query = DB::table('lock')->pluck('id');
 
         return $query;       
+    }
+
+   /**
+    * Return moodle url 
+	* @return Query 
+	*/
+    public function selectMoodleUrl()
+    {
+
+        $query = DB::table('settings')->first();
+
+        return $query;
+    }
+
+    /**
+    * Return source url 
+	* @return Query 
+	*/
+    public function selectSourceUrl()
+    {
+
+        $query = DB::table('settings')->where('settingsId', 2)->first();
+
+        return $query;
     }
 
 }

@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Util;
+
 use GuzzleHttp\Client;
 
-class Transfer 
+class Transfer extends Reader
 {
 
    /**
@@ -24,7 +25,7 @@ class Transfer
 	 */
 	public function down()
 	{
-		return $this->client->request('GET', env('DOWN_URL') . 'test');
+		return $this->client->request('GET', Reader::selectSourceUrl()->url);
 	}
 
 	/**

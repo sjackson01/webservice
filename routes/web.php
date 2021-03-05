@@ -16,15 +16,19 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', 'IndexController@index');
 
+Route::get('/settings', 'SettingsController@select');
+
+Route::post('/settings', 'SettingsController@add');
+
 Route::get('/enrol', 'UpController@enrol');
 
 Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');
 
-Route::get('/database', 'DatabaseController@handleData');
+Route::get('/functions', 'FunctionController@handleData');
 
-Route::post('/database', 'DatabaseController@handleData');
+Route::post('/functions', 'FunctionController@handleData');
 
 
 
