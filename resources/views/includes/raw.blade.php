@@ -4,6 +4,7 @@
             <h5 class="card-title">Test Server</h5>
             <p class="card-text">
                 @php 
+                if(isset($bodyDown)){
                     echo '<pre>';
                     print_r($bodyDown);
                     echo '</pre>';
@@ -12,7 +13,13 @@
                     echo '</pre>'; 
                     echo '<pre>';
                     print_r($value);
-                    echo '</pre>';    
+                    echo '</pre>';  
+                }  
+
+                if(isset($message))
+                {
+                    echo $message; 
+                }
                 @endphp
             </p>
         </div>

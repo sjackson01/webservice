@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use GuzzleHttp\Exception\ConnectException;
 use App\Util\Transfer;
 
 class IndexController extends Controller
@@ -24,12 +25,18 @@ class IndexController extends Controller
     * @return View
     */
    public function index()
-   {    
+   {  
+        try 
+        {
+            $upStatus = $this->upStatus->getUpStatus(); 
+            $downStatus = $this->downStatus->getDownStatus(); 
+            
+            return view('welcome', compact('upStatus', 'downStatus'));
+        }
 
-       $upStatus = $this->upStatus->getUpStatus(); 
-       $downStatus = $this->downStatus->getDownStatus(); 
-
-       return view('welcome', compact('upStatus', 'downStatus'));
-   }
-    
+        catch(ConnectException $e)
+        {
+            return view('welcome'); 
+        }
+    }
 }

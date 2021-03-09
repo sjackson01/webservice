@@ -5,7 +5,11 @@
             <h5 class="card-title">Up</h5>
             <p class="card-text">
                 @php
-                echo $upStatus
+                if(empty($upStatus)){
+                    echo "Please configure endpoint settings";
+                }else{
+                    echo $upStatus;
+                }
                 @endphp
             </p>
         </div>
@@ -18,7 +22,11 @@
         <h5 class="card-title">Down</h5>
             <p class="card-text">
                 @php
-                echo $downStatus
+                    if(empty($downStatus)){
+                        echo "Please configure endpoint settings";
+                    }else{
+                        echo $downStatus;
+                    }
                 @endphp
             </p>
         </div>

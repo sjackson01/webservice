@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use GuzzleHttp\Exception\ConnectException;
 use App\Util\Down;
 
 class DownController extends Controller
@@ -28,11 +29,21 @@ class DownController extends Controller
     */
    public function download()
    {    
-       $bodyDown = $this->bodyDown->getBodyDown(); 
-       $key = $this->key->getKey(); 
-       $value = $this->value->getValue(); 
-       
-       return view('down', compact('bodyDown', 'key', 'value'));
+       try
+       {
+            $bodyDown = $this->bodyDown->getBodyDown(); 
+            $key = $this->key->getKey(); 
+            $value = $this->value->getValue(); 
+        
+            return view('down', compact('bodyDown', 'key', 'value'));
+       }    
+
+       catch (ConnectException $e)
+       {    
+           $message = "No endpoint set";    
+
+           return view('down', compact('message'));
+       }
    }
     
 }
