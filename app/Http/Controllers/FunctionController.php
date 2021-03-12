@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request; 
 use App\Util\Reader;
 use App\Util\Writer;
@@ -41,12 +41,25 @@ class FunctionController extends Controller
     */
     public function selection()
     {    
-        $functions = $this->selectFunctions->selectFunctions();
-        $lockIds = $this->selectLockId->selectLockIds(); 
-        $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
-        $parameters =  $this->parameters->getParameters();  
+
+        try
+        {
+            $parameters =  $this->parameters->getParameters();  
+            $functions = $this->selectFunctions->selectFunctions();
+            $lockIds = $this->selectLockId->selectLockIds(); 
+            $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
         
-        return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
+            return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
+        }
+
+        catch (ConnectException $e)
+        {
+            $functions = $this->selectFunctions->selectFunctions();
+            $lockIds = $this->selectLockId->selectLockIds(); 
+            $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
+        
+            return view('functions', compact('functions', 'activeFunctions', 'lockIds'));
+        }
     }
 
    /**

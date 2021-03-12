@@ -47,12 +47,15 @@
                         echo '</button>';
                         }
                             echo '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+                            if(isset($parameters))
+                            {
                                 foreach($parameters as $param)
                                 {
                                 echo '<a class="dropdown-item">';
                                 echo $param;
                                 echo'</a>';
                                 }
+                            }
                         echo '</div>';
                     echo '</div>';
                 echo '</div>';
