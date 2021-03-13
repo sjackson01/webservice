@@ -5,7 +5,7 @@ namespace App\Util;
 class Down extends Transfer
 {
 
-	/**
+   /**
 	* Return endpoint response
 	* @return Body 
 	*/
@@ -14,7 +14,7 @@ class Down extends Transfer
 		return $this->responseHandler(self::down()->getBody());
 	}
 
-	/**
+   /**
 	* Return endpoint keys
 	* @return array
 	*/
@@ -31,7 +31,7 @@ class Down extends Transfer
 
 	}
 	
-	/**
+   /**
 	* Return endpoint values
 	* @return array
 	*/
@@ -48,7 +48,7 @@ class Down extends Transfer
 
 	}
 
-	/**
+   /**
 	* Return endpoint keys
 	* @return array
 	*/

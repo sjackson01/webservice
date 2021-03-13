@@ -26,6 +26,12 @@ Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/down', 'DownController@download');
 
+Route::get('/import', function(){
+    return view('import');
+});
+
+Route::post('/import','ImportController@import');
+
 Route::get('/functions', 'FunctionController@handleData');
 
 Route::post('/functions', 'FunctionController@handleData');

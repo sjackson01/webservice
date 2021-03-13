@@ -17,6 +17,7 @@
             <a href="/settings"><button class="btn btn-outline-info" type="button">Settings</button></a>
             <a href="/down"><button class="btn btn-outline-info" type="button">Down</button></a>
             <a href="/functions"><button class="btn btn-outline-info" type="button">Functions</button></a>
+            <a href="/import"><button class="btn btn-outline-info" type="button">Import</button></a>
         </form>
         </nav>
         <!-- END nav -->
