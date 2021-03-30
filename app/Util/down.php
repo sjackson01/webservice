@@ -54,10 +54,27 @@ class Down extends Transfer
 	*/
 	public function getParameters()
 	{
-		$keys = $this->getKey();
-		$values =  $this->getValue();
-		return array_merge($keys, $values);
+		
+		 // Check if directory is empty 
+		 if((count(scandir('C:\Bitnami\wampstack-7.4.9-0\apache2\htdocs\laravel_app\middleware\public\uploads')) <= 2)){
+				
+				// Get values from rest end point 
+				$keys = $this->getKey();
+				$values =  $this->getValue();
 
-	}
+				return array_merge($keys, $values);
+		 }else{	
+			
+			// Convert csv to array
+			$csv = array_map("str_getcsv", file("C:/Bitnami/wampstack-7.4.9-0/apache2/htdocs/laravel_app/middleware/public/uploads/test.csv")); 
+			
+			// Insert first row into array
+			foreach ($csv[0] as $row){      
+ 				$keys[] = $row; 
+			}
 
-}
+			// Return array 
+			return $keys;
+			}
+		}
+	} 
