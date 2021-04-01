@@ -54,9 +54,8 @@ class Down extends Transfer
 	*/
 	public function getParameters()
 	{
-		
 		 // Check if directory is empty 
-		 if((count(scandir('C:\Bitnami\wampstack-7.4.9-0\apache2\htdocs\laravel_app\middleware\public\uploads')) <= 2)){
+		 if((count(scandir('../public/uploads')) <= 2)){
 				
 				// Get values from rest end point 
 				$keys = $this->getKey();
@@ -66,7 +65,7 @@ class Down extends Transfer
 		 }else{	
 			
 			// Convert csv to array
-			$csv = array_map("str_getcsv", file("C:/Bitnami/wampstack-7.4.9-0/apache2/htdocs/laravel_app/middleware/public/uploads/test.csv")); 
+			$csv = array_map("str_getcsv", file("../public/uploads/test.csv")); 
 			
 			// Insert first row into array
 			foreach ($csv[0] as $row){      
