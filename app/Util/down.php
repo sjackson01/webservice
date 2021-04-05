@@ -64,8 +64,13 @@ class Down extends Transfer
 				return array_merge($keys, $values);
 		 }else{	
 			
+			$directory = '../public/uploads/';
+
+			// Locate file in directory
+			$file = scandir($directory, 1);
+
 			// Convert csv to array
-			$csv = array_map("str_getcsv", file("../public/uploads/test.csv")); 
+			$csv = array_map("str_getcsv", file($directory . $file[0])); 
 			
 			// Insert first row into array
 			foreach ($csv[0] as $row){      

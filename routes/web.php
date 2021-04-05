@@ -27,7 +27,12 @@ Route::get('/unenrol', 'UpController@unenrol');
 Route::get('/down', 'DownController@download');
 
 Route::get('/import', function(){
-    return view('import');
+    
+    $active = scandir('../public/uploads', 1); // Check active file
+    
+    $status = $active[0]; // Convert to string 
+
+    return view('import', compact('status'));
 });
 
 Route::post('/import','ImportController@import');
