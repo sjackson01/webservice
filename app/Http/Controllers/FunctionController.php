@@ -63,7 +63,7 @@ class FunctionController extends Controller
     }
 
    /**
-    * Query insert data and return
+    * Query insert data into
     * select data with view
     * @return View
     */

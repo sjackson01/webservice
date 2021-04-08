@@ -24,7 +24,7 @@ Route::get('/enrol', 'UpController@enrol');
 
 Route::get('/unenrol', 'UpController@unenrol');
 
-Route::get('/down', 'DownController@download');
+Route::get('/dataview', 'DownController@download');
 
 Route::get('/import', function(){
     
