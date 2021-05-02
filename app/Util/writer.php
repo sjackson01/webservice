@@ -7,13 +7,21 @@ class Writer
 {
        
    /**
-    * Insert functions into
-    * active function
+    * Insert functions and parameters
+    * into active functions
 	* @return bool
 	*/
-    public function insertFunctions($function)
+    public function insertFunctions($function, $parameter1, $parameter2, $parameter3, $parameter4, $parameter5, $parameter6)
     {   
-        DB::table('lock')->insert(['functions' => $function]);
+        DB::table('lock')->insert(array(
+            'functions' => $function,
+            'parameter1' => $parameter1,
+            'parameter2' => $parameter2,
+            'parameter3' => $parameter3,
+            'parameter4' => $parameter4,
+            'parameter5' => $parameter5,
+            'parameter6' => $parameter6
+        ));
     }
 
    /**

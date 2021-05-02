@@ -63,13 +63,14 @@ class FunctionController extends Controller
     }
 
    /**
-    * Query insert data into
-    * select data with view
+    * Query insert function and 
+    * parameters into lock table and 
+    * return select data with view
     * @return View
     */
     public function add()
     {
-        $query = $this->insertFunctions->insertFunctions(request('function')); 
+        $query = $this->insertFunctions->insertFunctions(request('function'), request('parameter1'), request('parameter2'),request('parameter3'),request('parameter4'),request('parameter5'),request('parameter6')); 
         return FunctionController::selection(); 
     }
 

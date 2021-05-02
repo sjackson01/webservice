@@ -8,7 +8,7 @@ class Reader
 
    /**
     * Return list of webservice
-    * functions 
+    * functions
 	* @return Query 
 	*/
     public function selectFunctions()
@@ -18,12 +18,13 @@ class Reader
 
    /**
     * Return list of saved active
-    * webservice functions
+    * webservice functions with 
+    * their parameters
 	* @return Query 
 	*/
     public function selectLockFunctions()
     {   
-        $query = DB::table('lock')->pluck('functions');
+        $query = DB::table('lock')->get();
 
         return $query;       
     }
