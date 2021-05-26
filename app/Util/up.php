@@ -1,83 +1,71 @@
 <?php
 
 namespace App\Util;
+use Illuminate\Support\Facades\DB;
 
 class Up Extends Transfer
 {
-
    /**
-	* Add enrolment info recieved from
-	* external API to endpoint request 
-	* @return string 
+    * Return current 
+	* moodle url 
+	* @return Query 
 	*/
-	public function getRoleId()
+	public function selectMoodleUrl()
 	{
-		$params = $this->responseHandler(self::down()->getBody());
-		return $roleId = "&enrolments[0][roleid]=" . $params[0]['roleId'];
+		return DB::table('settings')->first();
 	}
 
    /**
-	* Add enrolment info recieved from
-	* external API to endpoint request 
-	* @return string 
+    * Return active 
+	* functions 
+	* @return Query 
 	*/
-	public function getUserId()
+	public function selectActiveFunctions()
 	{
-		$params = $this->responseHandler(self::down()->getBody());
-		return $userId = "&enrolments[0][userid]=" . strval($params[0]['userId']);
+		return DB::table('lock')->get();
 	}
 
-   /**
-	* Add enrolment info recieved from
-	* external API to endpoint request 
-	* @return string
-	*/
-	public function getCourseId()
-	{
-		$params = $this->responseHandler(self::down()->getBody());
-		return $courseId = "&enrolments[0][courseid]=" . strval($params[0]['courseId']);
-	}
-
-   /**
-	* Construct endpoint request 
-	* @return string
-	*/
-	public function urlBuilderEnrol()
-	{
-		$url = env('TEST_URL_ENROL');
-		$paramters = $this->getRoleId() . $this->getUserId() . $this->getCourseId();
-		return $call = $url . $paramters;
 	
+   /**
+    * Combine query 
+	* results into url 
+	* @return Array 
+	*/
+	public function urlBuilder()
+	{
+
+		$object = $this->selectActiveFunctions(); 
+
+		foreach($object as $key=>$value)
+		{	
+			$moodleUrl = $this->selectMoodleURL()->url; // Url 
+			$wstoken = '?wstoken='; // Token string
+			$token = $this->selectMoodleUrl()->token; // Token
+			$wsfunction = '&wsfunction='; // Function string
+			$function = $value->functions; // Function
+			$wsformat = '&moodlewsrestformat='; // Format string
+			$format = $this->selectMoodleUrl()->format; // Format 
+
+			$url = [$moodleUrl.$wstoken.$token.$wsfunction.$function.$wsformat.$format]; // Assemble url 
+		
+			foreach($url as $value)
+			{
+				$requestUrls[] = $value; // Add urls to array
+			}
+		}
+		return $requestUrls; 
 	}
 
    /**
-	* Construct endpoint request
-	* @return string
+    * Send requests  
+	* @return Response 
 	*/
-	public function urlBuilderUnenrol()
-	{
-		$url = env('TEST_URL_UNENROL');
-		$paramters = $this->getRoleId() . $this->getUserId() . $this->getCourseId();
-		return $call = $url . $paramters;
-	
-	}	
-
-   /**
-	* Send endpoint request 
-	* @return Body 
-	*/
-	public function manualEnrol()
-	{
-		return $this->responseHandler(self::up($this->urlBuilderEnrol())->getBody());
+	public function sendData()
+	{	
+		foreach($this->urlBuilder() as $request)
+		{ 
+			return $this->responseHandler(self::up($request)->getBody()); // Loop send requests
+		}
 	}
-
-   /**
-	* Send endpoint request 
-	* @return Body 
-	*/
-	public function manualUnenrol()
-	{
-		return $this->responseHandler(self::up($this->urlBuilderUnenrol())->getBody());
-	}
-
 }
+   

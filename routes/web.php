@@ -22,13 +22,13 @@ Route::get('/endpoint', 'SettingsController@selectEndpointUrl');
 
 Route::post('/endpoint', 'SettingsController@addEndpointSettings');
 
-Route::get('/enrol', 'UpController@enrol');
+Route::get('/up', 'UpController@up');
 
-Route::get('/unenrol', 'UpController@unenrol');
+// Route::get('/unenrol', 'UpController@unenrol');
 
 Route::get('/dataview', 'DownController@download');
 
-// Check active csv 
+// Check if active csv 
 Route::get('/import', function(){
     
     $active = scandir('../public/uploads', 1); // Check active file

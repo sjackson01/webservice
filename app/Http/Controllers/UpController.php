@@ -6,37 +6,22 @@ use App\Util\Up;
 class UpController extends Controller
 {
 
-   protected $manualEnrol;
-   protected $manualUnenrol;
+   protected $url;
 
    /**
     * Class constructor.
     *
     */
-   public function __construct(Up $manualEnrol, Up $manualUnenrol)
+   public function __construct(Up $url)
    {    
-       $this->manualEnrol = $manualEnrol;
-       $this->manualUnenrol = $manualUnenrol; 
+       $this->url = $url; 
    }
 
-   /**
-    * Return view and data from endpoint
-    * @return View
-    */
-   public function enrol()
-   {      
-       $manualEnrol = $this->manualEnrol->manualEnrol(); 
-       return view('enrol', compact('manualEnrol'));
-   }
-
-   /**
-    * Return view and data from endpoint
-    * @return View
-    */
-   public function unenrol()
+   public function up()
    {
-        $manualUnenrol = $this->manualUnenrol->manualUnenrol(); 
-        return view('unenrol', compact('manualUnenrol'));
+        $query = $this->url->sendData();
+        
+        return view('up', compact('query')); 
    }
    
 }
