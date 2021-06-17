@@ -3,16 +3,15 @@
 namespace App\Util;
 use Illuminate\Support\Facades\DB;
 
-class Writer
+class Writer Extends Reader
 {
-       
-   /**
+    /**
     * Insert functions and parameters
     * into active functions
 	* @return bool
 	*/
-    public function insertFunctions($function, $parameter1, $parameter2, $parameter3, $parameter4, $parameter5, $parameter6)
-    {   
+    public function insertFunctions($function ,$parameter1 ,$parameter2 ,$parameter3 ,$parameter4 ,$parameter5 ,$parameter6 )
+    {  
         DB::table('lock')->insert(array(
             'functions' => $function,
             'parameter1' => $parameter1,

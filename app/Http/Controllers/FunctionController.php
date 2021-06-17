@@ -70,7 +70,17 @@ class FunctionController extends Controller
     */
     public function add()
     {
-        $query = $this->insertFunctions->insertFunctions(request('function'), request('parameter1'), request('parameter2'),request('parameter3'),request('parameter4'),request('parameter5'),request('parameter6')); 
+
+        $parameters = $this->insertFunctions->insertFunctions(
+            request('function'),
+            request('parameter1'),
+            request('parameter2'),
+            request('parameter3'), 
+            request('parameter4'),
+            request('parameter5'),
+            request('parameter6')
+        ); 
+
         return FunctionController::selection(); 
     }
 

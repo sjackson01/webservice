@@ -22,7 +22,7 @@
                                         echo "$value->parameter1"; 
                                             foreach($parameters as $param)
                                             {      
-                                                echo "<option value='". $param ."'>";
+                                                echo "<option value='". $value->paramstring1 . $param ."'>";
                                                     echo $param;
                                                 echo'</option>';
                                             }
@@ -35,7 +35,7 @@
                                     echo "$value->parameter2"; 
                                         foreach($parameters as $param)
                                         {      
-                                            echo "<option value='". $param ."'>";
+                                            echo "<option value='". $value->paramstring2 . $param ."'>";
                                                 echo $param;
                                             echo'</option>';
                                         }
@@ -48,7 +48,7 @@
                                     echo "$value->parameter3"; 
                                         foreach($parameters as $param)
                                         {      
-                                            echo "<option value='". $param ."'>";
+                                            echo "<option value='". $value->paramstring3 . $param ."'>";
                                                 echo $param;
                                             echo'</option>';
                                         }
@@ -61,7 +61,7 @@
                                     echo "$value->parameter4"; 
                                         foreach($parameters as $param)
                                         {      
-                                            echo "<option value='". $param ."'>";
+                                            echo "<option value='". $value->paramstring4 . $param ."'>";
                                                 echo $param;
                                             echo'</option>';
                                         }
@@ -74,7 +74,7 @@
                                     echo "$value->parameter5"; 
                                         foreach($parameters as $param)
                                         {      
-                                            echo "<option value='". $param ."'>";
+                                            echo "<option value='". $value->paramstring5 . $param ."'>";
                                                 echo $param;
                                             echo'</option>';
                                         }
@@ -87,7 +87,7 @@
                                     echo "$value->parameter6"; 
                                         foreach($parameters as $param)
                                         {      
-                                            echo "<option value='". $param ."'>";
+                                            echo "<option value='". $value->paramstring6 . $param ."'>";
                                                 echo $param;
                                             echo'</option>';
                                         }
