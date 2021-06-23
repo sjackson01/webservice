@@ -26,7 +26,7 @@ class DownController extends Controller
    {    
        try
        {        
-             $parameters = $this->parameters->getParameters(); 
+             $parameters = $this->parameters->dispalyParameters(); 
              
              return view('down', compact('parameters'));
                 

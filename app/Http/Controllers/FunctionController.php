@@ -30,7 +30,7 @@ class FunctionController extends Controller
         $this->selectLockId =  $selectLockId; 
         $this->insertFunctions = $insertFunctions;
         $this->deleteFunctions = $deleteFunctions;
-        $this->parameters = $parameters; 
+        $this->parameters = $parameters;
 
     }
 
@@ -44,7 +44,7 @@ class FunctionController extends Controller
 
         try
         {
-            $parameters =  $this->parameters->getParameters();  
+            $parameters =  $this->parameters->dispalyParameters();  
             $functions = $this->selectFunctions->selectFunctions();
             $lockIds = $this->selectLockId->selectLockIds(); 
             $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
@@ -71,7 +71,7 @@ class FunctionController extends Controller
     public function add()
     {
 
-        $parameters = $this->insertFunctions->insertFunctions(
+        $this->insertFunctions->insertFunctions(
             request('function'),
             request('parameter1'),
             request('parameter2'),

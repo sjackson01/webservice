@@ -52,7 +52,7 @@ class Down extends Transfer
 	* Return endpoint keys
 	* @return array
 	*/
-	public function getParameters()
+	public function dispalyParameters()
 	{
 		 // Check if directory is empty 
 		 if((count(scandir('../public/uploads')) <= 2)){
