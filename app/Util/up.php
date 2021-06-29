@@ -72,9 +72,8 @@ class Up Extends Transfer
     */
     public function urlBuilder()
     {
-
         $activeFunctions = $this->selectActiveFunctions();
-    
+
         foreach($activeFunctions as $key=>$value)
         {   
             $moodleUrl = $this->selectMoodleURL()->url; // Url 
@@ -87,34 +86,26 @@ class Up Extends Transfer
 
             $paramStrings = $this->selectParamStrings($value->functions); // Select active function strings
 
-            foreach($paramStrings as $key=>$value){ // Get parameter strings 
-                $strings = $value; 
+            foreach($paramStrings as $index=>$data){ // Get parameter strings 
+                $strings = $data; 
             }
 
-            
             $url = $moodleUrl.$wstoken.$token.$wsfunction.$function; // Assemble url
-            
-            
+
             if(isset($value->parameter1))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter1); // Get csv value
                 
                 $url .= $strings->paramstring1; // Add string
-
-                if(isset($csvValue[0])){
-                    $url .= $csvValue[0]; // Add csv value
-                }
+                $url .= $csvValue[0]; // Add csv value
             }
-            
+
             if(isset($value->parameter2))
             {   
                 $csvValue = $this->getCsvParameters($value->parameter2); 
 
                 $url .= $strings->paramstring2; // Add string
-
-                if(isset($csvValue[1])){
-                    $url .= $csvValue[1]; // Add csv value
-                }
+                $url .= $csvValue[1]; // Add csv value
             }
             
             if(isset($value->parameter3))
@@ -122,21 +113,15 @@ class Up Extends Transfer
                 $csvValue = $this->getCsvParameters($value->parameter3); 
 
                 $url .= $strings->paramstring3; // Add string
-
-                if(isset($csvValue[2])){
-                    $url .= $csvValue[2]; // Add csv value
-                }
+                $url .= $csvValue[2]; // Add csv value
             }
 
-            if(isset($value->parameter4))
+            if(isset($value->paramter4))
             {
                 $csvValue = $this->getCsvParameters($value->parameter4); 
 
                 $url .= $strings->paramstring4; // Add string
-
-                if(isset($csvValue[3])){
-                    $url .= $csvValue[3]; // Add csv value
-                }
+                $url .= $csvValue[3]; // Add csv value
             }
 
             if(isset($value->parameter5))
@@ -144,24 +129,17 @@ class Up Extends Transfer
                 $csvValue = $this->getCsvParameters($value->parameter5); 
 
                 $url .= $strings->paramstring5; // Add string
-
-                if(isset($csvValue[4])){
-                    $url .= $csvValue[4]; // Add csv value
-                } 
+                $url .= $csvValue[4]; // Add csv value
             }
 
             if(isset($value->parameter6))
             {
                 $csvValue = $this->getCsvParameters($value->parameter6); 
-
+                
                 $url .= $strings->paramstring6; // Add string
-
-                if(isset($csvValue[5])){
-                    $url .= $csvValue[5]; // Add csv value
-                } 
+                $url .= $csvValue[5]; // Add csv value 
             }
-             
-
+            
             if(isset($url))
             {
                 $url .= $wsformat.$format; // Add format 
@@ -173,11 +151,12 @@ class Up Extends Transfer
             {
                 $requestUrls[] = $array; 
             }
-            
+           
+            return $requestUrls; // Return request urls array 
         }
-
-        return $requestUrls; // Return request urls array 
-    }
+    
+    }  
+    
 
    /**
     * Send requests  
