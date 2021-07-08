@@ -64,17 +64,15 @@ class Up Extends Transfer
 
        $single = array_reduce($array, 'array_merge', array());// Creat single array from multi
 
-       $columnHeight = $interiorCount/$exteriorCount; // Get interior array height
+       $columnHeight = round($interiorCount/$exteriorCount); // Get interior array height
 
        $i=0; 
        
        foreach($single as $value) { // Move rows into columns
             if ($i++ % $columnHeight == $index) {
                 $result[] = $value;
-            } 
-                    
+            }         
        }
-
        return $result; 
     }
 
@@ -99,30 +97,24 @@ class Up Extends Transfer
         while(! feof($open)){
     		$array[] = fgetcsv($open); // Convert CSV to array
 		}
-        
-        array_pop($array); // Remove null element 
 
 		$index = array_search($columnHeader, $data); // Select active column header 
 
-        if($index === false)
+        if($index === false) // Change false return to 0 
         {
             $index = 0; 
         } 
-        
+
 		$result = $this->arrayMapper($array, $index); // Convert CSV rows to columns  
 
         return $result; // Return csv values
 
 		fclose($open); // Close file 
 	}
-    
-   /**
-    * Combine query 
-    * results into url 
-    * @return Array 
-    */
+
     public function urlBuilder()
     {
+        
         $activeFunctions = $this->selectActiveFunctions();
 
         foreach($activeFunctions as $key=>$value)
@@ -132,121 +124,99 @@ class Up Extends Transfer
             $token = $this->selectMoodleUrl()->token; // Token
             $wsfunction = '&wsfunction='; // Function string
             $function = $value->functions; // Function
-            $wsformat = '&moodlewsrestformat='; // Format string
-            $format = $this->selectMoodleUrl()->format; // Format 
-
-            $paramStrings = $this->selectParamStrings($value->functions); // Select active function strings
-
-            foreach($paramStrings as $index=>$data){ // Get parameter strings 
-                $strings = $data; 
-            }
-
+            
             $url = $moodleUrl.$wstoken.$token.$wsfunction.$function; // Assemble url
+        }
+        return $url; 
+    }
 
+    
+   /**
+    * Combine query 
+    * results into url 
+    * @return Array 
+    */
+    public function paramBuilder()
+    {
+        $activeFunctions = $this->selectActiveFunctions();
+
+        foreach($activeFunctions as $key=>$value)
+        { 
+            $paramStrings = $this->selectParamStrings($value->functions); // Select active function strings
+        }
+
+        foreach($paramStrings as $index=>$data){ // Get parameter strings 
+            $strings = $data; 
+        }
+            
+        $count = $this->getCsvParameters($value->parameter1); // Get array 
+
+        $height = count($count); // Find array length
+        
+        for($i = 0; $i < $height; $i++){
+        
+            $url = $this->urlBuilder(); // Get base url 
+        
             if(isset($value->parameter1))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter1); // Get csv value
 
-                $url .= $strings->paramstring1.$csvValue[0]; // Add string and csv value
-
-                $height = count($csvValue);
-
-                for($i = 0; $i < $height; $i++)
-                { 
-                    $urls[] = $url; 
-                }
-    
+                $url .= $strings->paramstring1.$csvValue[$i]; // Add string and csv value
             }
 
             if(isset($value->parameter2))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter2); // Get csv value
 
-                $url .= $strings->paramstring2.$csvValue[0]; // Add string and csv values
-
-                foreach($csvValue as $v)
-                { 
-                    $urls[] = $url; 
-                    
-                }
-               
+                $url .= $strings->paramstring2.$csvValue[$i]; // Add string and csv values
             }
             
             if(isset($value->parameter3))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter3); // Get csv value
                 
-                $url .= $strings->paramstring3.$csvValue[0]; // Add string and csv value
-
-                foreach($csvValue as $key)
-                { 
-                    $urls[] = $url; 
-                }
-    
+                $url .= $strings->paramstring3.$csvValue[$i]; // Add string and csv value
             }
 
             if(isset($value->parameter4))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter4); // Get csv value
                 
-                $url .= $strings->paramstring4.$csvValue[0]; // Add string and csv value
-
-                foreach($csvValue as $key)
-                { 
-                    $urls[] = $url; 
-                }
-    
+                $url .= $strings->paramstring4.$csvValue[$i]; // Add string and csv value
             }
             
             if(isset($value->parameter5))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter5); // Get csv value
                 
-                $url .= $strings->paramstring5.$csvValue[0]; // Add string and csv value
-
-                foreach($csvValue as $key)
-                { 
-                    $urls[] = $url; 
-                }
-    
+                $url .= $strings->paramstring5.$csvValue[$i]; // Add string and csv value
             }
 
             if(isset($value->parameter5))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter5); // Get csv value
                 
-                $url .= $strings->paramstring6.$csvValue[0]; // Add string and csv value
-
-                foreach($csvValue as $key)
-                { 
-                    $urls[] = $url; 
-                }
-    
+                $url .= $strings->paramstring6.$csvValue[$i]; // Add string and csv value
             }
 
             if(isset($value->parameter6))
             {
 			    $csvValue = $this->getCsvParameters($value->parameter6); // Get csv value
                 
-                $url .= $strings->paramstring2.$csvValue[0]; // Add string and csv value
-
-                foreach($csvValue as $key)
-                { 
-                    $urls[] = $url; 
-                }
-    
+                $url .= $strings->paramstring6.$csvValue[$i]; // Add string and csv value
             }
+
+            $wsformat = '&moodlewsrestformat='; // Format string
+
+            $format = $this->selectMoodleUrl()->format; // Format 
+
+            $url .= $wsformat.$format; // Add return format
+
+            $send[] = $url; // Add url to string
             
-            $count = count($urls); // Count urls
-
-            $multiplier = $count/3; // Select urls to send
-        
-            $send = array_splice($urls, -$multiplier); // Remove incompelte urls 
-
-            return $send; 
-
+            unset($url); // Unset working variable for 
         }
-    
+       return $send; 
     }  
     
 
