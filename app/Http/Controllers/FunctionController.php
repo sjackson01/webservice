@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request; 
 use App\Util\Reader;
 use App\Util\Writer;
@@ -30,7 +30,7 @@ class FunctionController extends Controller
         $this->selectLockId =  $selectLockId; 
         $this->insertFunctions = $insertFunctions;
         $this->deleteFunctions = $deleteFunctions;
-        $this->parameters = $parameters; 
+        $this->parameters = $parameters;
 
     }
 
@@ -41,22 +41,46 @@ class FunctionController extends Controller
     */
     public function selection()
     {    
-        $functions = $this->selectFunctions->selectFunctions();
-        $lockIds = $this->selectLockId->selectLockIds(); 
-        $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
-        $parameters =  $this->parameters->getParameters();  
+
+        try
+        {
+            $parameters =  $this->parameters->dispalyParameters();  
+            $functions = $this->selectFunctions->selectFunctions();
+            $lockIds = $this->selectLockId->selectLockIds(); 
+            $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
         
-        return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
+            return view('functions', compact('functions', 'activeFunctions', 'lockIds', 'parameters'));
+        }
+
+        catch (ConnectException $e)
+        {
+            $functions = $this->selectFunctions->selectFunctions();
+            $lockIds = $this->selectLockId->selectLockIds(); 
+            $activeFunctions = $this->selectLockFunctions->selectLockFunctions();
+        
+            return view('functions', compact('functions', 'activeFunctions', 'lockIds'));
+        }
     }
 
    /**
-    * Query insert data and return
-    * select data with view
+    * Query insert function and 
+    * parameters into lock table and 
+    * return select data with view
     * @return View
     */
     public function add()
     {
-        $query = $this->insertFunctions->insertFunctions(request('function')); 
+
+        $this->insertFunctions->insertFunctions(
+            request('function'),
+            request('parameter1'),
+            request('parameter2'),
+            request('parameter3'), 
+            request('parameter4'),
+            request('parameter5'),
+            request('parameter6')
+        ); 
+
         return FunctionController::selection(); 
     }
 

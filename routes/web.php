@@ -14,21 +14,36 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'SettingsController@selectMoodleUrl');
 
-Route::get('/settings', 'SettingsController@select');
+Route::post('/', 'SettingsController@addMoodleSettings');
 
-Route::post('/settings', 'SettingsController@add');
+Route::get('/endpoint', 'SettingsController@selectEndpointUrl');
 
-Route::get('/enrol', 'UpController@enrol');
+Route::post('/endpoint', 'SettingsController@addEndpointSettings');
 
-Route::get('/unenrol', 'UpController@unenrol');
+Route::get('/up', 'UpController@up');
 
-Route::get('/down', 'DownController@download');
+// Route::get('/unenrol', 'UpController@unenrol');
+
+Route::get('/dataview', 'DownController@download');
+
+// Check if active csv 
+Route::get('/import', function(){
+    
+    $active = scandir('../public/uploads', 1); // Check active file
+    
+    $status = $active[0]; // Convert to string 
+
+    return view('import', compact('status'));
+});
+
+Route::post('/import','ImportController@import');
 
 Route::get('/functions', 'FunctionController@handleData');
 
 Route::post('/functions', 'FunctionController@handleData');
+
 
 
 

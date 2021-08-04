@@ -49,41 +49,5 @@ class Transfer extends Reader
 		
 		return [];
 	}
-	
-	/**
-	 * Check endpoint status 
-	 * @return Status 
-	 */
-	public function getUpStatus()
-	{	
-		return $this->responseHandler(self::up(env('UP_URL'))->getStatusCode());
-	}
-
-	/**
-	 * Check endpoint version  
-	 * @return Version 
-	 */
-	public function getUpVersion()
-	{
-		return $this->responseHandler(self::up(env('UP_URL'))->getProtocolVersion());
-    }
-    
-    /**
-	 * Check endpoint status 
-	 * @return Status 
-	 */
-	public function getDownStatus()
-	{	
-		return $this->responseHandler(self::down()->getStatusCode());
-	}
-
-	/**
-	 * Check endpoint version  
-	 * @return Version 
-	 */
-	public function getDownVersion()
-	{
-		return $this->responseHandler(self::down()->getProtocolVersion());
-	}
 
 }

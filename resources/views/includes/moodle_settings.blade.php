@@ -1,9 +1,10 @@
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Endpoint Settings</h5>
+        <h4 class="card-title">Moodle Settings</h4>
         <p class="card-text">
-            @include('component.moodle_settings_input')
+            @include('component.moodle_settings_form')
         </p>
     </div>
 </div>
+    
     
