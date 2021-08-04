@@ -226,7 +226,7 @@ class Up Extends Transfer
     */
     public function sendData()
     {   
-        foreach($this->urlBuilder() as $request)
+        foreach($this->paramBuilder() as $request)
         { 
             return $this->responseHandler(self::up($request)->getBody()); // Loop send requests
         }

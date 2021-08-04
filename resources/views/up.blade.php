@@ -2,7 +2,7 @@
     @section('content')
     @php
         echo '<pre>';
-        print_r($query);
+        print_r($urls);
         echo '</pre>'; 
     @endphp
 @endsection

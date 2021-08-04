@@ -19,9 +19,9 @@ class UpController extends Controller
 
    public function up()
    {
-        $query = $this->url->paramBuilder();
+        $urls = $this->url->sendData();
         
-        return view('up', compact('query')); 
+        return view('up', compact('urls')); 
    }
    
 }
