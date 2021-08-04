@@ -1,4 +1,4 @@
 @extends('layout.app')
 @section('content')
-    @include('includes.settings_form')
+    @include('includes.endpoint_settings')
 @endsection

@@ -1,83 +1,236 @@
 <?php
 
 namespace App\Util;
+use Illuminate\Support\Facades\DB;
 
 class Up Extends Transfer
 {
+   /**
+    * Return current 
+    * moodle url 
+    * @return Query 
+    */
+    public function selectMoodleUrl()
+    {
+        return DB::table('settings')->first();
+    }
 
    /**
-	* Add enrolment info recieved from
-	* external API to endpoint request 
-	* @return string 
-	*/
-	public function getRoleId()
+    * Return active 
+    * functions 
+    * @return Query 
+    */
+    public function selectActiveFunctions()
+    {
+        return DB::table('lock')->get();
+    }
+
+    /**
+    * Return rest  
+    * parameter strings
+    * @return Query 
+    */
+
+    public function selectParamStrings($function)
+    {
+        return DB::table('functions')->where('functions', '=', $function)->get();
+    }
+
+    
+   /**
+    * Organize CSV rows
+    * into columns 
+    * @return Array  
+    */
+
+    public function arrayMapper($array, $index)
+    {
+       array_pop($array); // Remove null 
+
+       foreach($array as $key) // Get array keys
+       {
+           $keys[] = $key; 
+       }
+
+       $exteriorCount = count($keys); // Count top level elements
+       
+       foreach($array as $k => $v)// Get array values
+       {
+           $var[] = $v; 
+       }
+
+       $interiorCount = count($var, 1) - $exteriorCount; // Count Interior Elements  
+
+
+       $single = array_reduce($array, 'array_merge', array());// Creat single array from multi
+
+       $columnHeight = round($interiorCount/$exteriorCount); // Get interior array height
+
+       $i=0; 
+       
+       foreach($single as $value) { // Move rows into columns
+            if ($i++ % $columnHeight == $index) {
+                $result[] = $value;
+            }         
+       }
+       return $result; 
+    }
+
+    /**
+	 * Return csv values
+	 * @return array
+	 */
+	public function getCsvParameters($columnHeader)
 	{
-		$params = $this->responseHandler(self::down()->getBody());
-		return $roleId = "&enrolments[0][roleid]=" . $params[0]['roleId'];
+		$directory = '../public/uploads/'; // File Directory 
+
+		$file = scandir($directory, 1); // Get file 
+
+		$open = fopen($directory.$file[0],"r"); // Open File 
+
+		$csv = fgetcsv($open); // Parse File 
+
+		foreach($csv as $key => $value) {
+    		$data[] = $value; // Insert columns headers into array
+		}
+
+        while(! feof($open)){
+    		$array[] = fgetcsv($open); // Convert CSV to array
+		}
+
+		$index = array_search($columnHeader, $data); // Select active column header 
+
+        if($index === false) // Change false return to 0 
+        {
+            $index = 0; 
+        } 
+
+		$result = $this->arrayMapper($array, $index); // Convert CSV rows to columns  
+
+        return $result; // Return csv values
+
+		fclose($open); // Close file 
 	}
 
+    public function urlBuilder()
+    {
+        
+        $activeFunctions = $this->selectActiveFunctions();
+
+        foreach($activeFunctions as $key=>$value)
+        {   
+            $moodleUrl = $this->selectMoodleURL()->url; // Url 
+            $wstoken = '?wstoken='; // Token string
+            $token = $this->selectMoodleUrl()->token; // Token
+            $wsfunction = '&wsfunction='; // Function string
+            $function = $value->functions; // Function
+            
+            $url = $moodleUrl.$wstoken.$token.$wsfunction.$function; // Assemble url
+        }
+        return $url; 
+    }
+
+    
    /**
-	* Add enrolment info recieved from
-	* external API to endpoint request 
-	* @return string 
-	*/
-	public function getUserId()
-	{
-		$params = $this->responseHandler(self::down()->getBody());
-		return $userId = "&enrolments[0][userid]=" . strval($params[0]['userId']);
-	}
+    * Combine query 
+    * results into url 
+    * @return Array 
+    */
+    public function paramBuilder()
+    {
+        $activeFunctions = $this->selectActiveFunctions();
+
+        foreach($activeFunctions as $key=>$value)
+        { 
+            $paramStrings = $this->selectParamStrings($value->functions); // Select active function strings
+        }
+
+        foreach($paramStrings as $index=>$data){ // Get parameter strings 
+            $strings = $data; 
+        }
+            
+        $count = $this->getCsvParameters($value->parameter1); // Get array 
+
+        $height = count($count); // Find array length
+        
+        for($i = 0; $i < $height; $i++){
+        
+            $url = $this->urlBuilder(); // Get base url 
+        
+            if(isset($value->parameter1))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter1); // Get csv value
+
+                $url .= $strings->paramstring1.$csvValue[$i]; // Add string and csv value
+            }
+
+            if(isset($value->parameter2))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter2); // Get csv value
+
+                $url .= $strings->paramstring2.$csvValue[$i]; // Add string and csv values
+            }
+            
+            if(isset($value->parameter3))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter3); // Get csv value
+                
+                $url .= $strings->paramstring3.$csvValue[$i]; // Add string and csv value
+            }
+
+            if(isset($value->parameter4))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter4); // Get csv value
+                
+                $url .= $strings->paramstring4.$csvValue[$i]; // Add string and csv value
+            }
+            
+            if(isset($value->parameter5))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter5); // Get csv value
+                
+                $url .= $strings->paramstring5.$csvValue[$i]; // Add string and csv value
+            }
+
+            if(isset($value->parameter5))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter5); // Get csv value
+                
+                $url .= $strings->paramstring6.$csvValue[$i]; // Add string and csv value
+            }
+
+            if(isset($value->parameter6))
+            {
+			    $csvValue = $this->getCsvParameters($value->parameter6); // Get csv value
+                
+                $url .= $strings->paramstring6.$csvValue[$i]; // Add string and csv value
+            }
+
+            $wsformat = '&moodlewsrestformat='; // Format string
+
+            $format = $this->selectMoodleUrl()->format; // Format 
+
+            $url .= $wsformat.$format; // Add return format
+
+            $send[] = $url; // Add url to string
+            
+            unset($url); // Unset working variable for 
+        }
+       return $send; 
+    }  
+    
 
    /**
-	* Add enrolment info recieved from
-	* external API to endpoint request 
-	* @return string
-	*/
-	public function getCourseId()
-	{
-		$params = $this->responseHandler(self::down()->getBody());
-		return $courseId = "&enrolments[0][courseid]=" . strval($params[0]['courseId']);
-	}
-
-   /**
-	* Construct endpoint request 
-	* @return string
-	*/
-	public function urlBuilderEnrol()
-	{
-		$url = env('TEST_URL_ENROL');
-		$paramters = $this->getRoleId() . $this->getUserId() . $this->getCourseId();
-		return $call = $url . $paramters;
-	
-	}
-
-   /**
-	* Construct endpoint request
-	* @return string
-	*/
-	public function urlBuilderUnenrol()
-	{
-		$url = env('TEST_URL_UNENROL');
-		$paramters = $this->getRoleId() . $this->getUserId() . $this->getCourseId();
-		return $call = $url . $paramters;
-	
-	}	
-
-   /**
-	* Send endpoint request 
-	* @return Body 
-	*/
-	public function manualEnrol()
-	{
-		return $this->responseHandler(self::up($this->urlBuilderEnrol())->getBody());
-	}
-
-   /**
-	* Send endpoint request 
-	* @return Body 
-	*/
-	public function manualUnenrol()
-	{
-		return $this->responseHandler(self::up($this->urlBuilderUnenrol())->getBody());
-	}
-
+    * Send requests  
+    * @return Response 
+    */
+    public function sendData()
+    {   
+        foreach($this->paramBuilder() as $request)
+        { 
+            return $this->responseHandler(self::up($request)->getBody()); // Loop send requests
+        }
+    }
 }
+   
+

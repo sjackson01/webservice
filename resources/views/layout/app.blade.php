@@ -13,10 +13,12 @@
         <!-- START nav -->
         <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
-            <a href="{{ url('/') }}"><button class="btn btn-outline-info" type="button">Home</button></a>
-            <a href="/settings"><button class="btn btn-outline-info" type="button">Settings</button></a>
-            <a href="/down"><button class="btn btn-outline-info" type="button">Down</button></a>
+            <a href="{{ url('/') }}"><button class="btn btn-outline-info" type="button">Moodle Settings</button></a>
+            <a href="/endpoint"><button class="btn btn-outline-info" type="button">Endpoint Settings</button></a>
+            <a href="/import"><button class="btn btn-outline-info" type="button">Import Settings</button></a>
+            <a href="/dataview"><button class="btn btn-outline-info" type="button">Data View</button></a>
             <a href="/functions"><button class="btn btn-outline-info" type="button">Functions</button></a>
+            <a href="/up"><button class="btn btn-outline-info" type="button">Up Test</button></a>
         </form>
         </nav>
         <!-- END nav -->
